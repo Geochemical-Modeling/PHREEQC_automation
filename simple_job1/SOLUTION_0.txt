@@ -1,0 +1,16 @@
+SOLUTION 0  Average Rain Water Northern Europe 
+temp      25 
+pH        5.601 
+pe        13.892 
+redox     pe 
+units     mol/l 
+density   1 
+C         1.668e-05    
+Ca        3.543e-05    
+Cl        9.788e-05    
+K         8.951e-06    
+Mg        1.604e-05    
+N         1.928e-05    
+Na        8.917e-05    
+S         2.280e-05    
+-water    1 # kg 
