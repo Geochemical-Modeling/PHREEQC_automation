@@ -12,7 +12,7 @@
 import os
 import re
 import sys
-
+import itertools
 
 def find_section(sections :list, search_str: str) -> int:
     """find section position by search string"""
@@ -77,7 +77,28 @@ def workflow(basefile):
     # step 1: replace solution, and generate a new base file
     second_basefile = replace_solution(basefile, "SOLUTION 0","SOLUTION_0.txt")
     print(second_basefile)
+    all_files = [basefile]
+    all_files.append(second_basefile)
 
+    # step 2: generate all combination of parameters
+    # three parameters
+    # temperature
+    para_temp = list(range(5, 40, 5))
+    para_shifts = list(range(100, 550, 50))
+    # Shifts*Time_Step = 157824904.4 s
+    # para_time_step
+    print(para_temp)
+    print(para_shifts)
+    listOLists = [para_temp, para_shifts]
+    para_combines = itertools.product(*listOLists)
+    all_para = []
+    for entry in para_combines:
+        shifts = entry[1]
+        time_step = 157824904.4/entry[1]
+        all_para.append([entry[0],shifts,time_step])
+    print(f'Number of para combinations: {len(all_para)}')
+
+    # step 3: replace parameters in each base file
 
 def main():
     basefile = "Beerling_Clean_V2.pqi"
