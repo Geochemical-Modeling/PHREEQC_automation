@@ -14,9 +14,36 @@ import re
 import sys
 
 
-def replace_solution():
+def find_section(sections :list, search_str: str) -> int:
+    """find section position by search string"""
+
+    for index, element in enumerate(sections):
+        if element.startswith(search_str):
+            return index
+    # not found, just return None
+    return None
+
+def replace_solution(basefile: str, header :str, solution_file: str) -> str:
     """replace solution in template file with new solution"""
-    pass
+    
+    sections = read_sections(basefile)
+    print(f'Total sections: {len(sections)}')
+    inx = find_section(sections, header)
+    print(f'{header} is found at {inx}')
+    with open(solution_file,"r",  encoding="utf-8") as file:
+        solution_replace = file.read()
+    sections[inx] = solution_replace
+    newbasefile = basefile.split(".")[0] + "_" + header.replace(" ", "_") + ".pqi"
+    with open(newbasefile, "w",  encoding="utf-8") as file:
+        newtext = os.linesep.join(sections)
+        file.write(newtext)
+        file.write(os.linesep)
+    
+    # check the sections of new base file
+    sections = read_sections(newbasefile)
+    print(f'Total sections in new basefile: {len(sections)}')
+
+    return newbasefile
 
 
 def update_parameters():
@@ -25,13 +52,14 @@ def update_parameters():
 
 
 def split_on_empty_lines(s: str) -> list:
-
+    """split into sections by empty lines"""
     # greedily match 2 or more new-lines
     blank_line_regex = r"(?:\r?\n){2,}"
 
     return re.split(blank_line_regex, s.strip())
 
 def read_sections(textfile: str) -> list:
+    """read file into sections"""
     try:
         with open(textfile, "r", encoding="utf-8") as file:
             lines = file.read()
@@ -45,8 +73,10 @@ def read_sections(textfile: str) -> list:
 
 def workflow(basefile):
     """generate inputs for simple_job1"""
-    sections = read_sections(basefile)
-    print(f'Total sections: {len(sections)}')
+
+    # step 1: replace solution, and generate a new base file
+    second_basefile = replace_solution(basefile, "SOLUTION 0","SOLUTION_0.txt")
+    print(second_basefile)
 
 
 def main():
