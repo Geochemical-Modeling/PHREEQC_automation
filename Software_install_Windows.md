@@ -21,4 +21,5 @@ In powershell, use "where.exe phreeqc" to find the installation location
 ### Test PHREEQC
 
 ### CPU
-Xeon Silver 3208 @21.0 2 Processors
+Intel Xeon Silver 4208 CPU @ 2.10GHz Cores: 8 Threads: 16
+ 
