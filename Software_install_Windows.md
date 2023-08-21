@@ -19,3 +19,6 @@ In powershell, use "where.exe phreeqc" to find the installation location
 > C:\Program Files\USGS\phreeqc-3.7.3-15968-x64\bin\ClrRelease\phreeqc.exe
 
 ### Test PHREEQC
+
+### CPU
+Xeon Silver 3208 @21.0 2 Processors
