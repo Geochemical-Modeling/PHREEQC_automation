@@ -82,6 +82,7 @@ def workflow(basefile):
 
     # step 2: generate all combination of parameters
     # three parameters
+    para_names = ['temp','shifts','time_step']
     # temperature
     para_temp = list(range(5, 40, 5))
     para_shifts = list(range(100, 550, 50))
@@ -91,14 +92,32 @@ def workflow(basefile):
     print(para_shifts)
     listOLists = [para_temp, para_shifts]
     para_combines = itertools.product(*listOLists)
-    all_para = []
+    all_paras = []
     for entry in para_combines:
         shifts = entry[1]
         time_step = 157824904.4/entry[1]
-        all_para.append([entry[0],shifts,time_step])
-    print(f'Number of para combinations: {len(all_para)}')
+        all_paras.append([str(entry[0]),str(shifts),"{:.3f}".format(time_step)])
+    print(f'Number of para combinations: {len(all_paras)}')
 
     # step 3: replace parameters in each base file
+    # regular expression: temp\s+(\d+(?:\.\d+)?)
+    count = 1
+    for afile in all_files:
+        with open(afile,"r",  encoding="utf-8") as file:
+            template = file.read()
+        for values in all_paras:
+            para_value = zip(para_names,values)
+            template_r = template
+            for k,v in para_value:
+                # use regular expression sub to replace
+                re_pattern = rf"{k}\s+(\d+(?:\.\d+)?)"
+                re_replacement = f"{k}  {v}"
+                template_r = re.sub(re_pattern, re_replacement, template_r)
+            jobname = f"job{str(count).zfill(3)}.pqi"
+            with open(jobname, "w", encoding="utf-8") as file:
+                file.write(template_r)
+                print("Write file:", jobname)
+                count += 1
 
 def main():
     basefile = "Beerling_Clean_V2.pqi"
