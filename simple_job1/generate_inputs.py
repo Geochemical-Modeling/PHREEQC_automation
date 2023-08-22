@@ -119,6 +119,13 @@ def workflow(basefile):
         for values in all_paras:
             para_value = zip(para_names, values)
             template_r = template
+            # remove the path from DATABASE
+            # or comment out this line
+            # ^DATABASE.*\.dat
+            re_db = r'^DATABASE.*\.dat'
+            dbpath = re.search(re_db,template_r).group(0)
+            dbname = dbpath.split("\\")[-1]
+            template_r = re.sub(re_db, f'DATABASE {dbname}', template_r)
             for k, v in para_value:
                 # use regular expression sub to replace
                 re_pattern = rf"{k}\s+(\d+(?:\.\d+)?)"
