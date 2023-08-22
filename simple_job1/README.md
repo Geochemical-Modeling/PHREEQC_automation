@@ -76,8 +76,21 @@ Data for the program are free format:
 
 ## Simple Test
 
-Test run on the Latitude 7420 
+Test run on the Latitude 7420  
+copy 'C:\Program Files\USGS\phreeqc-3.7.3-15968-x64\bin\Release\phreeqc.exe' to test folder  
 ```
-PS C:\PHREEQC_automation\simple_job1\test> Measure-Command {phreeqc.bat job001.pqi job001.out T_H.dat job001.log}
-```
+PS C:\PHREEQC_automation\simple_job1\test> Measure-Command {./phreeqc.exe job001.pqi job001.out T_H.dat job001.log}
 
+
+Days              : 0
+Hours             : 0
+Minutes           : 4
+Seconds           : 58
+Milliseconds      : 538
+Ticks             : 2985386348
+TotalDays         : 0.00345530827314815
+TotalHours        : 0.0829273985555555
+TotalMinutes      : 4.97564391333333
+TotalSeconds      : 298.5386348
+TotalMilliseconds : 298538.6348
+```
