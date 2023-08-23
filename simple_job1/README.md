@@ -80,11 +80,12 @@ Test run on the Latitude 7420
 copy 'C:\Program Files\USGS\phreeqc-3.7.3-15968-x64\bin\Release\phreeqc.exe' to test folder  
 
 ```
-./phreeqc.exe job001.pqi job001.pqo
+./phreeqc.exe job001.pqi job001.pqo T_H.dat job001.log
 ```
-in the end of job001.pqo  
-```
---------------------------------
-End of Run after 283.46 Seconds.
---------------------------------
-```
+| job | time (s) |  
+| --    | --     |
+|job001 | 283.46 |
+|job063 | 910.237|
+|job064 | 274.26 |
+|job126 | 1161.58|
+
