@@ -23,13 +23,34 @@
         ...
 """
 
-import  argparse
+import os
+import sys
+import argparse
+import configparser
+
+def cfg_to_dict(cfgfile):
+    """load cfg file to dictionary"""
+
+    config_object = configparser.ConfigParser()
+    try:
+        with open(cfgfile, "r") as file:
+            config_object.read_file(file)
+    except FileNotFoundError:
+        print(f"{cfgfile} is not found!")
+        sys.exit()
+    output_dict = {s:dict(config_object.items(s)) for s in config_object.sections()}
+    return output_dict
 
 def run_jobs(jobcfg, dryrun, cleanrun):
     """run jobs with a configuration file"""
     print("configuration file: ",jobcfg)
     print("dryrun ? ", dryrun)
     print("clean run ?", cleanrun)
+
+    jobcfg_dict = cfg_to_dict(jobcfg)
+    print(jobcfg_dict)
+    
+
 
 def main():
     parser = argparse.ArgumentParser(description="Run jobs in batch.")
