@@ -13,10 +13,9 @@
     
     [phreeqc]
     phreeqcexe: "path to phreeqcexe"
-    copyexe: True
     ----------------
     The folder structure:
-    jobrundir/jobname
+    jobrundir/
         .logfile
         -- job1
         -- job2
@@ -27,6 +26,7 @@ import os
 import sys
 import argparse
 import configparser
+import shutil
 
 def cfg_to_dict(cfgfile):
     """load cfg file to dictionary"""
@@ -41,24 +41,54 @@ def cfg_to_dict(cfgfile):
     output_dict = {s:dict(config_object.items(s)) for s in config_object.sections()}
     return output_dict
 
-def run_jobs(jobcfg, dryrun, cleanrun):
+def prepare_jobs(jobcfg_dict):
+    """setup job folders and copy files"""
+
+    jobfolder = jobcfg_dict["jobs"]["jobrundir"]
+    if os.path.exists(jobfolder):
+        shutil.rmtree(jobfolder)
+        print(f"clean run, {jobfolder} is deleted")
+    
+    os.makedirs(jobfolder, exist_ok = True)
+    print(f"setup run folder: {jobfolder}")
+
+    # get the list of input file
+    input_dir = jobcfg_dict['jobs']['inputs']
+    input_pqi = [x for x in os.listdir(input_dir) if ".pqi" in x ]
+    print(input_pqi)
+
+    # copy files over
+    for entry in input_pqi:
+        input_name = entry.split(".")[0]
+        subfolder = os.path.join(jobfolder,input_name)
+        if os.path.exists(subfolder):
+            print(subfolder)
+            shutil.rmtree(subfolder)
+        else:    
+            os.makedirs(subfolder, exist_ok = True)
+        # copy file
+        # input.qpi, phreeqcexe, database
+        files_to_copy =[os.path.join(input_dir, entry), jobcfg_dict['phreeqc']['phreeqcexe'],jobcfg_dict['jobs']['database']]
+        for file in files_to_copy:
+            print(file)
+            shutil.copy(file, subfolder)
+        
+
+def run_jobs(jobcfg, dryrun):
     """run jobs with a configuration file"""
     print("configuration file: ",jobcfg)
     print("dryrun ? ", dryrun)
-    print("clean run ?", cleanrun)
 
     jobcfg_dict = cfg_to_dict(jobcfg)
     print(jobcfg_dict)
-    
-
+    prepare_jobs(jobcfg_dict)    
 
 def main():
     parser = argparse.ArgumentParser(description="Run jobs in batch.")
     parser.add_argument(dest="job_cfg", type=str, help="job configuration")
     parser.add_argument("-d","--dryrun",action="store_true",help="test with a dryrun")
-    parser.add_argument("-c","--cleanrun",action="store_true",help="start over, clean run")
     args = parser.parse_args()
-    run_jobs(args.job_cfg, args.dryrun, args.cleanrun)
+    run_jobs(args.job_cfg, args.dryrun)
 
 if __name__ == "__main__":
     main()
