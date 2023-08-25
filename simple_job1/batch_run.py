@@ -31,6 +31,7 @@ import logging
 from multiprocessing import Pool, cpu_count
 import subprocess
 import time
+import random
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
@@ -104,19 +105,30 @@ def dryrun_task(ajob):
     """dry run a job"""
 
     os.chdir(ajob['folder'])
+    print(f"run job: {ajob['input']}")
+    sys.stdout.flush()
     output = subprocess.check_output(f"dir", shell=True).decode()
-    time.sleep(5)
-    return output
+    sleep_time = random.randint(3, 9)
+    time.sleep(sleep_time)
+    print(f"finish job: {ajob['input']}")
+    sys.stdout.flush()
+    return sleep_time
 
 def dryrun_jobs(jobs):
     """dry run jobs"""
 
     pool_size = int(cpu_count()/2)
     logger.info("dry run start.")
+    start = time.perf_counter()
     with Pool(pool_size) as pool:
         results = set(pool.map(dryrun_task,jobs))
-    print(results)
+    print("total sleep time: ", sum(results))
+    end = time.perf_counter()
+    total_time = end - start
+    total_time = "{:.2f}".format(total_time)
+    print(f'run time: {total_time}')
     logger.info("dry run end.")
+    logger.info(f'total run time (s): {total_time}')
 
 def phreeqc_task(ajob):
     """execute a phreeqc job"""
