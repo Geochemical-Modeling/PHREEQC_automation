@@ -29,6 +29,8 @@ import configparser
 import shutil
 import logging
 from multiprocessing import Pool, cpu_count
+import subprocess
+import time
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
@@ -98,10 +100,46 @@ def prepare_jobs(jobcfg_dict):
     
     return jobs_to_run
 
-def dryrun_jobs():
+def dryrun_task(ajob):
+    """dry run a job"""
+
+    os.chdir(ajob['folder'])
+    output = subprocess.check_output(f"dir", shell=True).decode()
+    time.sleep(5)
+    return output
+
+def dryrun_jobs(jobs):
     """dry run jobs"""
 
     pool_size = int(cpu_count()/2)
+    logger.info("dry run start.")
+    with Pool(pool_size) as pool:
+        results = set(pool.map(dryrun_task,jobs))
+    print(results)
+    logger.info("dry run end.")
+
+def phreeqc_task(ajob):
+    """execute a phreeqc job"""
+
+    os.chdir(ajob['folder'])
+    exe_n = './phreeqc.exe'
+    input_n = ajob['input']
+    output_n = ajob['output']
+    database_n = ajob['database']
+    log_n = ajob['log']
+    cmd = f'{exe_n} {input_n} {output_n} {database_n} {log_n}'
+    exit_code = subprocess.call(cmd)
+    return exit_code
+
+
+def run_phreeqc_jobs(jobs):
+    """run the real job"""
+    pool_size = int(cpu_count()/2)
+    logger.info("run start.")
+    with Pool(pool_size) as pool:
+        results = set(pool.map(phreeqc_task,jobs))
+    print(results)
+    logger.info("run end.")
 
 
 def run_jobs(jobcfg, dryrun):
@@ -115,7 +153,9 @@ def run_jobs(jobcfg, dryrun):
     print(jobs_list)
 
     if dryrun:
-        dryrun_jobs(job_cfg_dict,jobs_list)
+        dryrun_jobs(jobs_list)
+    else:
+        run_phreeqc_jobs(jobs_list)
 
 def main():
     parser = argparse.ArgumentParser(description="Run jobs in batch.")

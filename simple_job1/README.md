@@ -88,4 +88,7 @@ copy 'C:\Program Files\USGS\phreeqc-3.7.3-15968-x64\bin\Release\phreeqc.exe' to 
 |job063 | 910.237|
 |job064 | 274.26 |
 |job126 | 1161.58|
+|total | 2629.537|
 
+run the above 4 jobs with pool_size = 4
+1566 s 
