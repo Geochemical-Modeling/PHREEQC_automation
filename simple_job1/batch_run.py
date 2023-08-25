@@ -28,6 +28,7 @@ import argparse
 import configparser
 import shutil
 import logging
+from multiprocessing import Pool, cpu_count
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
@@ -78,8 +79,6 @@ def prepare_jobs(jobcfg_dict):
     for entry in input_pqi:
         input_name = entry.split(".")[0]
         subfolder = os.path.join(jobfolder,input_name)
-        # record jobs to run
-        jobs_to_run.append({"folder":subfolder, "input":entry})
         if os.path.exists(subfolder):
             shutil.rmtree(subfolder)
         else:    
@@ -89,9 +88,21 @@ def prepare_jobs(jobcfg_dict):
         files_to_copy =[os.path.join(input_dir, entry), jobcfg_dict['phreeqc']['phreeqcexe'],jobcfg_dict['jobs']['database']]
         for file in files_to_copy:
             shutil.copy(file, subfolder)
+        database= os.path.basename(jobcfg_dict['jobs']['database'])
+        output = f"{input_name}.pqo"
+        screenlog = f"{input_name}.log"
+        # record jobs to run
+        jobs_to_run.append({"folder":subfolder, "input":entry,"output":output,"database":database,"log":screenlog})
+
     logger.info('setup is done')    
     
     return jobs_to_run
+
+def dryrun_jobs():
+    """dry run jobs"""
+
+    pool_size = int(cpu_count()/2)
+
 
 def run_jobs(jobcfg, dryrun):
     """run jobs with a configuration file"""
@@ -102,6 +113,9 @@ def run_jobs(jobcfg, dryrun):
     print(jobcfg_dict)
     jobs_list = prepare_jobs(jobcfg_dict)    
     print(jobs_list)
+
+    if dryrun:
+        dryrun_jobs(job_cfg_dict,jobs_list)
 
 def main():
     parser = argparse.ArgumentParser(description="Run jobs in batch.")
