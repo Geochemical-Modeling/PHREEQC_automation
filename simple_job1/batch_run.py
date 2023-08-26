@@ -134,24 +134,40 @@ def phreeqc_task(ajob):
     """execute a phreeqc job"""
 
     os.chdir(ajob['folder'])
+    print(f"run job: {ajob['input']}")
+    sys.stdout.flush()
+
     exe_n = './phreeqc.exe'
     input_n = ajob['input']
     output_n = ajob['output']
     database_n = ajob['database']
     log_n = ajob['log']
     cmd = f'{exe_n} {input_n} {output_n} {database_n} {log_n}'
+    j_start = time.perf_counter()
     exit_code = subprocess.call(cmd)
-    return exit_code
+    j_end = time.perf_counter()
+    j_time = j_end - j_start
+    print(f"finish job: {ajob['input']} at {j_time} s")
+    sys.stdout.flush()
+
+    return j_time
 
 
 def run_phreeqc_jobs(jobs):
     """run the real job"""
     pool_size = int(cpu_count()/2)
     logger.info("run start.")
+    start = time.perf_counter()
     with Pool(pool_size) as pool:
         results = set(pool.map(phreeqc_task,jobs))
-    print(results)
+    end = time.perf_counter()
+    total_time = end - start
+    total_time = "{:.2f}".format(total_time)
+    total_job_time = sum(results)
+    print(f'run time (s): {total_time}')
     logger.info("run end.")
+    logger.info((f'total job time (s): {total_job_time}'))
+    logger.info(f'total run time (s): {total_time}')
 
 
 def run_jobs(jobcfg, dryrun):
