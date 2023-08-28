@@ -105,3 +105,43 @@ finish job: job126.pqi at 1409.239821 s
 total job time (s): 3300.1260567
 run time (s): 1409.39
 ```
+
+run the 6 jobs with pool_size = 6  
+```
+run job: job001.pqi
+run job: job019.pqi
+run job: job063.pqi
+run job: job064.pqi
+run job: job073.pqi
+run job: job126.pqi
+finish job: job019.pqi at 384.6590129 s
+finish job: job064.pqi at 480.5692115 s
+finish job: job073.pqi at 481.0660019 s
+finish job: job001.pqi at 485.0253998 s
+finish job: job063.pqi at 1141.0009629 s
+total job time (s): 4442.5316387
+finish job: job126.pqi at 1470.2110496999999 s
+run time (s): 1470.43
+```
+
+run the 8 jobs with pool_size = 8 (cpu_count):  
+```
+run job: job001.pqi
+run job: job019.pqi
+run job: job040.pqi
+run job: job063.pqi
+run job: job064.pqi
+run job: job073.pqi
+run job: job100.pqi
+run job: job126.pqi
+finish job: job100.pqi at 438.92362230000003 s
+finish job: job019.pqi at 452.8202027 s
+finish job: job064.pqi at 561.3858574000001 s
+finish job: job073.pqi at 561.7786804000001 s
+finish job: job001.pqi at 569.0253035 s
+finish job: job040.pqi at 787.2322855 s
+finish job: job063.pqi at 1251.4866483 s
+finish job: job126.pqi at 1574.4223771000002 s
+total job time (s): 6197.0749772
+run time (s): 1574.67
+```

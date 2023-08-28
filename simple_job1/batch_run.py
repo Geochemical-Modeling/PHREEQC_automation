@@ -155,7 +155,9 @@ def phreeqc_task(ajob):
 
 def run_phreeqc_jobs(jobs):
     """run the real job"""
-    pool_size = int(cpu_count()/2)
+    #pool_size = int(cpu_count()/2) # for testing
+    #pool_size = 6 # for testing
+    pool_size = cpu_count()
     logger.info("run start.")
     start = time.perf_counter()
     with Pool(pool_size) as pool:
@@ -164,9 +166,10 @@ def run_phreeqc_jobs(jobs):
     total_time = end - start
     total_time = "{:.2f}".format(total_time)
     total_job_time = sum(results)
+    print(f'total job time (s): {total_job_time}')
     print(f'run time (s): {total_time}')
     logger.info("run end.")
-    logger.info((f'total job time (s): {total_job_time}'))
+    logger.info(f'total job time (s): {total_job_time}')
     logger.info(f'total run time (s): {total_time}')
 
 
