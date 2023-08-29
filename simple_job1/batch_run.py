@@ -144,7 +144,11 @@ def phreeqc_task(ajob):
     log_n = ajob['log']
     cmd = f'{exe_n} {input_n} {output_n} {database_n} {log_n}'
     j_start = time.perf_counter()
-    exit_code = subprocess.call(cmd)
+    try:
+        exit_code = subprocess.call(cmd)
+    except Exception as error:
+        print(f'!Error: {ajob["input"]} : {error}')
+        sys.stdout.flush()
     j_end = time.perf_counter()
     j_time = j_end - j_start
     print(f"finish job: {ajob['input']} at {j_time} s")
