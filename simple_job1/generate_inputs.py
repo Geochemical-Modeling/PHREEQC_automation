@@ -145,7 +145,7 @@ def workflow(basefile):
 
 
 def main():
-    basefile = "Beerling_Clean_V2.pqi"
+    basefile = "Beerling_Clean_V3.pqi"
     workflow(basefile=basefile)
 
 

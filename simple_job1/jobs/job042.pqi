@@ -66,10 +66,17 @@ log_k     1.816
 delta_h   -87.445 kJ
 -analytical_expression -777.1986 -0.081479938 43489.999 273.02384 -1612380.4 0
 #(Blanc et al,, 2012);
-Glass
-Na0.13Ca0.08Mg0.05K0.10Fe0.12Al0.26Si1.00O2.86 + 0.68H+ + 2.18H2O + 0.21e- = 0.26Al(OH)4- + 0.08Ca+2 + 0.12Fe+2 + H4SiO4 + 0.1K+ + 0.05Mg+2 + 0.13Na+
-log_k     5.305
+#Glass
+#Na0.13Ca0.08Mg0.05K0.10Fe0.12Al0.26Si1.00O2.86 + 0.68H+ + 2.18H2O + 0.21e- = 0.26Al(OH)4- + 0.08Ca+2 + 0.12Fe+2 + H4SiO4 + 0.1K+ + 0.05Mg+2 + 0.13Na+
+#log_k     5.305
 #(Aradóttir et al,, 2012)
+
+Glass  
+SiAl0.358Fe0.19Mg0.281Ca0.264Na0.078K0.008O3.315 + 2.63 H+ + 0.685 H2O = H4SiO4 + 0.358 Al+3 + 0.19 Fe+2 + 0.281 Mg+2 + 0.264 Ca+2 + 0.078 Na+ + 0.008 K+
+	-analytic    -4.898524E+00    -1.355410E-05     4.079257E+03     2.253723E-01     0.0     0.0
+	-Vm	38.488
+#Pollyea and Rimstidt (2017)
+
 ############Equilibrium minerals
 Calcite
 	CaCO3 = Ca+2 + CO3-2 
@@ -492,28 +499,63 @@ Ilmenite
 260 moles = rate*TIME
 270 SAVE moles
 -end
+#Glass
+#-start
+#10 REM Rate law from Flaathen et al. (2010) 
+#20 REM Affinity ON
+#30 moles = 0
+#40 IF(M <= 0 OR SI("Glass") >= 0) THEN GOTO 200
+#50 rssa = PARM(1)
+#60 r_conc = PARM(2)
+#70 wporosity = PARM(3)
+#80 afrac = PARM(4)
+#90 a0 = rssa*r_conc*afrac/wporosity
+#100 v = PARM(5)
+#110 temp = TK
+#120 k_glass = 5e-4
+#130 eapp_glass = 25.5
+#140 n_acid = 3
+#150 hplus = ACT("H+")
+#160 alplus = ACT("Al+3")
+#170 r_acid_al = k_glass*EXP(-eapp_glass/8.314e-3/temp)*((hplus^n_acid)/(alplus))^0.503
+#180 rate = (a0/v)*(M/M0)^0.67*r_acid_al*(1-SR("Glass"))
+#190 moles = rate*TIME
+#200 SAVE moles
+
 Glass
+# from Pollyea and Rimstidt (2017)
 -start
-10 REM Rate law from Flaathen et al. (2010) 
-20 REM Affinity ON
-30 moles = 0
-40 IF(M <= 0 OR SI("Glass") >= 0) THEN GOTO 200
-50 rssa = PARM(1)
-60 r_conc = PARM(2)
-70 wporosity = PARM(3)
-80 afrac = PARM(4)
-90 a0 = rssa*r_conc*afrac/wporosity
-100 v = PARM(5)
-110 temp = TK
-120 k_glass = 5e-4
-130 eapp_glass = 25.5
-140 n_acid = 3
-150 hplus = ACT("H+")
-160 alplus = ACT("Al+3")
-170 r_acid_al = k_glass*EXP(-eapp_glass/8.314e-3/temp)*((hplus^n_acid)/(alplus))^0.503
-180 rate = (a0/v)*(M/M0)^0.67*r_acid_al*(1-SR("Glass"))
-190 moles = rate*TIME
-200 SAVE moles
+3 moles = 0
+5 rssa = PARM(1)
+6 r_conc = PARM(2)
+7 wporosity = PARM(3)
+8 afrac = PARM(4)
+9 a0 = rssa*r_conc*afrac/wporosity
+10 v = PARM(5)
+11 rem acid solution parameters
+12 a1=485		
+13 E1=39700
+14 n1=1.013
+20 rem neutral solution parameters
+21 a2=0.0	
+22 E2=0.0
+30 rem base solution parameters
+31 a3=5.34E-5		
+32 E3=38400
+33 n2=-0.258
+36 rem rate=0 if no minerals and undersaturated
+40 SR_mineral=SR("Glass")
+41 if (M<0) then goto 200
+42 if (M=0 and SR_mineral<1) then goto 200
+50 if (SA<=0) then SA=1
+60 R=8.31451
+75 Rate1=a1*EXP(-E1/R/TK)*ACT("H+")^n1  #acid rate expression
+80 Rate2=a2*EXP(-E2/R/TK)               #neutral rate expression
+85 Rate3=a3*EXP(-E3/R/TK)*ACT("H+")^n2    #base rate expression
+90 Rate=(Rate1+Rate2+Rate3)*(1-Sr_mineral)*(a0/v)*(M/M0)^0.67
+100 moles= rate*Time
+200 save moles
+-end
 
 INCREMENTAL_REACTIONS true
 
@@ -523,9 +565,9 @@ INCREMENTAL_REACTIONS true
 #Soil minerals			= 0.53	L_soil_mnrl/L_soil
 #Soil carbon				= 0.02	L_carbon/L_soil
 #Effective porosity		= 0.20	L_porewater/L_soil
-#“Air” = air and blind pores	= 0.25	L_air/L_soil
+#“Air"= air and blind pores	= 0.25	L_air/L_soil
 
-# Application “rate” of basalt	
+# Application “rate"of basalt	
 #-----------------------------
 #Basalt amended	100	tonne_bslt/ha_soil
 #Height of topsoil layer	0.25	m_soil
@@ -653,7 +695,7 @@ Glass
 #-bad_step_max 500
 -cvode true
 -cvode_order 5
--cvode_steps 100
+-cvode_steps 200
 
 # Average leachate 4.58 L/colm. Column c/s area 0.0181 m2/colm. Period 121 days/colm. Porosity 0.20. 
 # Bulk flowthrough = 763.8 mm/year. Pore velocity = 1.21e-7 m/sec. Shift period = 413154.2 s/5cm. 
