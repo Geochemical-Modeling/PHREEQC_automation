@@ -18,6 +18,10 @@ In powershell, use "where.exe phreeqc" to find the installation location
 > C:\Program Files\USGS\phreeqc-3.7.3-15968-x64\bin\phreeqc.bat  
 > C:\Program Files\USGS\phreeqc-3.7.3-15968-x64\bin\ClrRelease\phreeqc.exe
 
+### PHREEQC Automation
+```
+git clone https://github.com/Geochemical-Modeling/PHREEQC_automation.git
+```
 ### Test PHREEQC
 
 ### CPU
