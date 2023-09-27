@@ -60,12 +60,21 @@ Temp [5;35;5] : [5, 10, 15, 20, 25, 30, 35]
 Shifts [100;500;50] [100, 150, 200, 250, 300, 350, 400, 450, 500]  
 Time_Step * Shift =  157824904.4 (s, 5 years)
 * Thermodynamic
-Quartz, Plagioclase, Apatite, Diopside_Mn, Diopside, Olivine, Alkali-feldspar, Montmorillonite, Ilmenite, Glass, Al(OH)3(a), Calcite, SiO2(a), Gibbsite, Goethite, Kaolinite, Fe(OH)3(a), Pyrolusite.  
-+/- one order of magnitude  
+Quartz, Plagioclase, Apatite, Diopside_Mn, Diopside, Olivine, Alkali-feldspar, Montmorillonite, Ilmenite, Glass, Al(OH)3(a), Calcite, SiO2(a), Gibbsite, Goethite, Kaolinite, Fe(OH)3(a), Pyrolusite 
++/- one order of magnitude  (19*3 = 57)  
 Examples:
     * Quartz: log_k change to -4.98 and -2.98 : [-3.98, -4.98, -2.98]
     * Plagioclase: log_k change to 15.34 and 17.34 : [16.34, 15.34, 17.34]
-    * Apatite: log_k change to -4.421 and -2.421 : [-3.421, -4.421, -2.421]
+    * Apatite: log_k change to -4.421 and -2.421 : [-3.421, -4.421, -2.421] 
+* Kinetics  
+MikeSorghum, Quartz, Plagioclase, Apatite, Diopside_Mn, Diopside, Olivine, Alkali-feldspar, Montmorillonite, Ilmenite, Glass (12*3 = 36)
++/- two orders of magnitude for mineral phases; x10 or x0.1 (MikeSorghum one order of magnitude)
+Examples:  
+    * Quartz:  
+    270 rate = (a0/v)*(M/M0)^0.67*r_all*(1-SR("Quartz"))  
+    270 rate = (a0/v)*(M/M0)^0.67*r_all*(1-SR("Quartz"))*0.1  
+    270 rate = (a0/v)*(M/M0)^0.67*r_all*(1-SR("Quartz"))*10  
+
 ### Total Simulations
-2 * 7 * 9 = 126
+2 * 7 * 9 * 57 * 36 = 258552 
 
