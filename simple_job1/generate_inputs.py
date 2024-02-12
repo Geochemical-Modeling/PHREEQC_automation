@@ -78,21 +78,29 @@ def read_sections(textfile: str) -> list:
 def modify_rate_line_for_mineral(content, mineral, multiplier):
     """
     Modify the rate line within a mineral block in the content by applying a multiplier
-    to the (1-SR("mineral name")) part of its rate equation.
+    directly after 'k_sorghum', before any comments or additional content.
     """
-    # Pattern to find the rate line that ends with (1-SR("mineral"))
-    rate_line_pattern = re.compile(rf'(rate = .*?\(1-SR\("{mineral}"\)\))')
-    # Search and replace the rate line with the modified one including the multiplier
-    def replace_rate_line(match):
-        # Extract the original rate line from the match
-        original_rate_line = match.group(1)
-        # Append the multiplier to the (1-SR("mineral")) part
-        modified_rate_line = f"{original_rate_line}*{multiplier}"
-        return modified_rate_line
-
-    # Replace the rate line in the content using the pattern and replacement function
-    modified_content = rate_line_pattern.sub(replace_rate_line, content)
+    if mineral == "MikeSorghum":
+        # Adjusted pattern to include 'k_sorghum' and optionally capture comments or additional content
+        rate_line_pattern = re.compile(rf'(plant_rate\s*=\s*\(plantarea\)\*k_sorghum)(\s*#.*)?')
+        def replace_rate_line_sorghum(match):
+            part_before_comment = match.group(1)  # Part before the comment
+            comment = match.group(2) if match.group(2) else ''  # The comment, if present
+            # Insert the multiplier directly after 'k_sorghum', before the comment
+            modified_rate_line = f"{part_before_comment}*{multiplier}{comment}"
+            return modified_rate_line
+        modified_content = rate_line_pattern.sub(replace_rate_line_sorghum, content)
+    else:
+        # For other minerals, modify the rate line by appending the multiplier to the (1-SR("mineral")) part
+        rate_line_pattern = re.compile(rf'(rate = .*?\(1-SR\("{mineral}"\)\))')
+        def replace_rate_line_other(match):
+            original_rate_line = match.group(1)
+            modified_rate_line = f"{original_rate_line}*{multiplier}"  # Append the multiplier
+            return modified_rate_line
+        modified_content = rate_line_pattern.sub(replace_rate_line_other, content)
+    
     return modified_content
+
 
 
 
