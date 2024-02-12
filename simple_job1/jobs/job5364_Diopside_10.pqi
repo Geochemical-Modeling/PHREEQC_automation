@@ -1,0 +1,700 @@
+DATABASE D:\Program Files (x86)\USGS\PHREEQCI\database\T_H.dat
+#DATABASE C:\PHREEQC\database\T_H.DAT
+# This database (T_H.DAT, Appelo and Postma 2005) is a development of the 
+# standard wateq4f.dat database which is shipped with the PHREEQC software
+# (Parkhurst and Appelo 2013). T_H.DAT contains complexation constants for
+# particulate organic matter based on the WHAM model (Tipping 1998; Tipping and
+# Hurley 1992). 
+#
+TITLE First Column Experiment
+
+SOLUTION_MASTER_SPECIES
+Ti	 Ti(OH)4	0.0	Ti		47.88
+
+SOLUTION_SPECIES
+Ti(OH)4 =  Ti(OH)4 
+	log_k 0
+	-delta_H	0		# Not possible to calculate
+#(Blanc et al,, 2012); 
+
+PHASES
+Quartz
+SiO2 + 2H2O = H4SiO4
+log_k     -3.98
+delta_h   5.99 kcal
+-analytical_expression 0.41 0 -1309 0 0 0
+#(Ball & Nordstrom, 1991);
+Plagioclase # Labradorite
+Ca0.5Na0.5Al1.5Si2.5O8 + 6.4H+ + 1.6H2O + 0.4OH- = 1.5Al+3 + 0.5Ca+2 + 2.5H4SiO4 + 0.5Na+
+log_k     16.34
+delta_h   -213.1 kcal
+#(Taylor et al., 2012);
+Apatite
+Ca5(PO4)3OH + 4H+ = 5Ca+2 + H2O + 3HPO4-2
+log_k     -3.421
+delta_h   -36.155 kcal
+#(Ball & Nordstrom, 1991);
+Diopside_Mn
+Ca0.87Mg0.94Mn0.19Si1.7O6 + 4H+ + 2H2O + 1.2e- = 0.87Ca+2 + 1.7H4SiO4 + 0.94Mg+2 + 0.19Mn+2 + 1.2OH-
+log_k     19.894
+delta_h   -32.348 kcal
+#(Ball & Nordstrom, 1991);
+Diopside
+CaMg0.7Al0.6Si1.7O6 + 4H+ + 2H2O = 0.6Al+3 + Ca+2 + 1.7H4SiO4 + 0.7Mg+2 + 1.2OH-
+log_k     19.894
+delta_h   -32.348 kcal
+#(Ball & Nordstrom, 1991);
+Olivine # Forsterite
+Mg1.04Fe0.96SiO4 + 4H+ = 0.96Fe+2 + H4SiO4 + 1.04Mg+2
+log_k     28.306
+delta_h   -48.578 kcal
+#(Ball & Nordstrom, 1991);
+Alkali-feldspar # Kfeldspar
+K0.41Na0.56Ca0.03Al1.03Si2.97O8 + 4H+ + 4H2O = 1.03Al+3 + 0.03Ca+2 + 2.97H4SiO4 + 0.41K+ + 0.56Na+ + 0.12OH-
+log_k     -0.022
+delta_h   -49.4 kJ
+#(Taylor et al., 2012);
+Montmorillonite # Montmorillonite(HcCa)
+Ca0.6Al2Si4O10(OH)2 + 6H+ + 4H2O = 2Al+3 + 0.6Ca+2 + 4H4SiO4 + 1.2e-
+log_k     8.977
+delta_h   -134.339 kJ
+-analytical_expression -1014.7125 -0.15964425 58544.948 363.59958 -2779126.6 0
+#(Blanc et al,, 2012);
+Ilmenite
+Fe1.4Ti0.6O3 + 2H+ + H2O + 0.8 e- = 1.4Fe+2 + 0.6Ti(OH)4 + 1.6 OH-
+log_k     1.816
+delta_h   -87.445 kJ
+-analytical_expression -777.1986 -0.081479938 43489.999 273.02384 -1612380.4 0
+#(Blanc et al,, 2012);
+#Glass
+#Na0.13Ca0.08Mg0.05K0.10Fe0.12Al0.26Si1.00O2.86 + 0.68H+ + 2.18H2O + 0.21e- = 0.26Al(OH)4- + 0.08Ca+2 + 0.12Fe+2 + H4SiO4 + 0.1K+ + 0.05Mg+2 + 0.13Na+
+#log_k     5.305
+#(Aradóttir et al,, 2012)
+
+Glass  
+SiAl0.358Fe0.19Mg0.281Ca0.264Na0.078K0.008O3.315 + 2.63 H+ + 0.685 H2O = H4SiO4 + 0.358 Al+3 + 0.19 Fe+2 + 0.281 Mg+2 + 0.264 Ca+2 + 0.078 Na+ + 0.008 K+
+	-analytic    -4.898524E+00    -1.355410E-05     4.079257E+03     2.253723E-01     0.0     0.0
+	-Vm	38.488
+#Pollyea and Rimstidt (2017)
+
+############Equilibrium minerals
+Calcite
+	CaCO3 = Ca+2 + CO3-2 
+	log_k		-8.48
+	delta_h	-2.297 kcal
+	-analytical	-171.9065	-0.077993	2839.319	71.595	0.0
+SiO2(a)            
+	SiO2 + 2H2O = H4SiO4 
+	log_k		-2.71
+	delta_h	3.34 kcal
+	-analytical	-0.26	0.0	-731.0	0.0	0.0
+Al(OH)3(a)        
+	Al(OH)3 + 3H+ = Al+3 + 3H2O 
+	log_k		10.8
+	delta_h	-26.5 kcal
+Pyrolusite         
+	MnO2 + 4H+ + 2e- = Mn+2 + 2H2O 
+	log_k		41.38
+	delta_h	-65.11 kcal
+Fe(OH)3(a)         
+	Fe(OH)3 + 3H+ = Fe+3 + 3H2O 
+	log_k		4.891
+SELECTED_OUTPUT 1
+-file                 Beerling_original.out
+-totals               N  Na  Ca  Mg  K  Al  Si Fe Mn Sr Ba
+P  C(4)  Hfo_s  Hfo_w
+-molalities           CaX2  KX  MgX2  NaX FeX2 MnX2 SrX2 AlX3 BaX2
+Hfo_wH2PO4  Hfo_wHPO4-
+-equilibrium_phases   Calcite SiO2(a) Al(OH)3(a) Pyrolusite Fe(OH)3(a) O2(g) CO2(g)  
+-saturation_indices   Calcite SiO2(a) Al(OH)3(a) Pyrolusite Fe(OH)3(a) O2(g) CO2(g) Quartz  Plagioclase  Apatite  Diopside_Mn
+Diopside  Olivine  Alkali-feldspar  Montmorillonite Ilmenite  Glass  MikeSorghum
+-kinetic_reactants    Quartz  Plagioclase  Apatite  Diopside_Mn Diopside  Olivine  Alkali-feldspar  Montmorillonite Ilmenite  Glass  MikeSorghum
+
+USER_PUNCH 1
+-headings SurfH_Ca SurfH_Mg SurfH_H Hfo_PO4
+-start
+10 PUNCH SURF("Ca","H") SURF("Mg","H") SURF("H","H") SURF("P","Hfo")
+-end
+
+SOLUTION 0  Average Rain Water Northern Europe 
+temp  20 
+pH        5.601 
+pe        13.892 
+redox     pe 
+units     mol/l 
+density   1 
+C         1.668e-05    
+Ca        3.543e-05    
+Cl        9.788e-05    
+K         8.951e-06    
+Mg        1.604e-05    
+N         1.928e-05    
+Na        8.917e-05    
+S         2.280e-05    
+-water    1 # kg 
+
+SOLUTION 1-11 Leachate for no-basalt planted control
+temp  20
+pH        8.1
+pe        4
+redox     pe
+units     mol/l
+density   1
+Al	1.8347E-06
+Ba	5.4686E-06
+Ca	8.0346E-04
+Fe	4.8291E-06
+K	2.0116E-05
+Li	3.3629E-07
+Mg	6.1360E-05
+Mn	3.3374E-08
+Na	1.8010E-04
+Si	5.5344E-05
+Sr	9.7588E-07
+Ti	1.1488E-07
+Zn	2.3076E-06
+F	5.8442E-05
+Cl	1.6345E-04
+N(3)	1.2607E-05
+S(6)	5.0777E-05
+N(5)	4.5146E-04
+C(4)	1.1585E-03
+-water    1 # kg
+
+# Calcium carbonate from basalt is treated here as an equilibrium phase (calcite) - cells 1-5 only 
+# Apatite is a kinetic phase - cells 1-5 only
+# CO2(g) from exponential curve fit of data in (Nan et al., 2016).
+# Last cell simply solution exposed to atmosphere
+# O2(g) is introduced in trace amounts to keep the redox above precipitation of ferric oxide, which is observed in the columns
+#
+EQUILIBRIUM_PHASES 1 O2(g) -2.0 10; Calcite 0 0.00839; SiO2(a) 0 0; Al(OH)3(a) 0 0; Pyrolusite 0 0; Fe(OH)3(a) 0 0; CO2(g) -2.722 10
+EQUILIBRIUM_PHASES 2 O2(g) -2.0 10; Calcite 0 0.00839; SiO2(a) 0 0; Al(OH)3(a) 0 0; Pyrolusite 0 0; Fe(OH)3(a) 0 0; CO2(g) -2.356 10
+EQUILIBRIUM_PHASES 3 O2(g) -2.0 10; Calcite 0 0.00839; SiO2(a) 0 0; Al(OH)3(a) 0 0; Pyrolusite 0 0; Fe(OH)3(a) 0 0; CO2(g) -2.186 10
+EQUILIBRIUM_PHASES 4 O2(g) -2.0 10; Calcite 0 0.00839; SiO2(a) 0 0; Al(OH)3(a) 0 0; Pyrolusite 0 0; Fe(OH)3(a) 0 0; CO2(g) -2.085 10
+EQUILIBRIUM_PHASES 5 O2(g) -2.0 10; Calcite 0 0.00839; SiO2(a) 0 0; Al(OH)3(a) 0 0; Pyrolusite 0 0; Fe(OH)3(a) 0 0; CO2(g) -2.021 10
+EQUILIBRIUM_PHASES 6 O2(g) -2.0 10; Calcite 0 0; SiO2(a) 0 0; Al(OH)3(a) 0 0; Pyrolusite 0 0; Fe(OH)3(a) 0 0; CO2(g) -1.978 10
+EQUILIBRIUM_PHASES 7 O2(g) -2.0 10; Calcite 0 0; SiO2(a) 0 0; Al(OH)3(a) 0 0; Pyrolusite 0 0; Fe(OH)3(a) 0 0; CO2(g) -1.949 10
+EQUILIBRIUM_PHASES 8 O2(g) -2.0 10; Calcite 0 0; SiO2(a) 0 0; Al(OH)3(a) 0 0; Pyrolusite 0 0; Fe(OH)3(a) 0 0; CO2(g) -1.93 10
+EQUILIBRIUM_PHASES 9 O2(g) -2.0 10; Calcite 0 0; SiO2(a) 0 0; Al(OH)3(a) 0 0; Pyrolusite 0 0; Fe(OH)3(a) 0 0; CO2(g) -1.916 10
+EQUILIBRIUM_PHASES 10 O2(g) -2.0 10; Calcite 0 0; SiO2(a) 0 0; Al(OH)3(a) 0 0; Pyrolusite 0 0; Fe(OH)3(a) 0 0; CO2(g) -1.907 10
+EQUILIBRIUM_PHASES 11 O2(g) -0.678 10; Calcite 0 0; SiO2(a) 0 0; Al(OH)3(a) 0 0; Pyrolusite 0 0; Fe(OH)3(a) 0 0; CO2(g) -3.385 10
+END
+
+EXCHANGE 1-10
+X       1.943
+-equilibrate with solution 1
+-pitzer_exchange_gammas true
+END
+
+# Surface constants are taken from Appelo and Postma (2005)
+SURFACE 1-10  # H is the ensemble of exchangeable sites on the particulate organic carbon in the soil (Soil_C_Org (1.933%)). 
+H_a    8.18E-02    4.65E+04    115.26  # Total concentration of sites (moles/L_porewater), OC specific surface area (m2/g), Total mass concentration OC (g/L_porewater)
+H_b    8.18E-02;    H_c    8.18E-02,    H_d    8.18E-02
+H_e    4.09E-02;    H_f    4.09E-02,    H_g    4.09E-02,    H_h    4.09E-02
+H_ab    2.73E-02;    H_ad    2.73E-02,    H_af    2.73E-02,    H_ah     2.73E-02
+H_bc    2.73E-02;    H_be    2.73E-02,    H_bg    2.73E-02,    H_cd     2.73E-02
+H_cf    2.73E-02;    H_ch    2.73E-02,    H_de    2.73E-02,    H_dg     2.73E-02
+-Donnan
+# HFO is from the National Soil Inventory - 4.05% - Measured by ICP of an aqua regia digest
+Hfo_w   9.7e-2  600  44.3  # Total number of sites (moles), HFO specific surface area (m2/g), Total mass HFO (g)
+Hfo_s   2.49e-3
+-equilibrate 1
+END
+
+RATES
+MikeSorghum
+-start
+10 moles = 0
+#20 IF((TOTAL_TIME MOD 31622400) > 10368000) THEN GOTO 220 # 1 mmol/plant added in 120 days every year
+20 IF((SIM_TIME MOD 31622400) > 10368000) THEN GOTO 220 # 1 mmol/plant added in 120 days every year
+30 plantarea = PARM(1)         # plantarea is the proportion of the plant in the cell
+40 v = PARM(2)          # v is the volume of solution in the cell - not used
+#60 k_sorghum = -1/10368000 # moles/m2_plant/column/second # unit area
+60 k_sorghum = -1/10368000/1000 # moles/m2_plant/column/second # unit area
+200 plant_rate = (plantarea)*k_sorghum # moles/second/cell
+205 rem print "plant_rate = " plant_rate
+210 moles = plant_rate*TIME
+220 SAVE moles # moles/litre_cell
+-end
+Quartz
+-start
+10 REM Rate law from Taylor et al. (2016) 
+20 REM Affinity ON
+30 moles = 0
+40 IF(M <= 0 OR SI("Quartz") > 0) THEN GOTO 290 
+50 rssa = PARM(1)
+60 r_conc = PARM(2)
+70 wporosity = PARM(3)
+80 afrac = PARM(4)
+90 a0 = rssa*r_conc*afrac/wporosity
+100 v = PARM(5)
+110 dif_temp = 1/TK-1/298.15
+120 k_acid = 24*10^-11.36
+130 eapp_acid = 87.7
+140 n_acid = 0.31
+150 k_neut = 10^-13.99
+160 eapp_neut = 87.7
+170 LgK_OH = -9.22
+180 n_OH = 0.41
+190 n_base = -n_OH
+200 k_base = 10^(LgK_OH - 14*n_OH)
+210 eapp_base = 87.7
+220 hplus = ACT("H+")
+230 r_acid = k_acid*EXP((-eapp_acid/8.314e-3)*dif_temp)*(hplus^n_acid)
+240 r_neut = k_neut*EXP((-eapp_neut/8.314e-3)*dif_temp)
+250 r_base = k_base*EXP((-eapp_base/8.314e-3)*dif_temp)*(hplus^n_base)
+260 r_all = r_acid+r_neut+r_base
+270 rate = (a0/v)*(M/M0)^0.67*r_all*(1-SR("Quartz"))
+280 moles = rate*TIME
+290 SAVE moles
+-end
+Plagioclase # Labradorite
+-start
+10 REM Rate law from Palandri and Kharaka (2004) 
+20 REM Affinity ON
+30 moles = 0
+40 IF(M <= 0 OR SI("Plagioclase") > 0) THEN GOTO 270 
+50 rssa = PARM(1)
+60 r_conc = PARM(2)
+70 wporosity = PARM(3)
+80 afrac = PARM(4)
+90 a0 = rssa*r_conc*afrac/wporosity
+100 v = PARM(5)
+110 dif_temp = 1/TK-1/298.15
+120 k_acid = 10^-7.87
+130 eapp_acid = 42.1
+140 n_acid = 0.626
+150 k_neut = 10^-10.91
+160 eapp_neut = 45.2
+170 k_base = 0
+180 eapp_base = 0
+190 n_base = 0
+200 hplus = MOL("H+")
+210 r_acid = k_acid*EXP((-eapp_acid/8.314e-3)*dif_temp)*(hplus^n_acid)
+220 r_neut = k_neut*EXP((-eapp_neut/8.314e-3)*dif_temp)
+230 r_base = k_base*EXP((-eapp_base/8.314e-3)*dif_temp)*(hplus^n_base)
+240 r_all = r_acid+r_neut+r_base
+250 rate = (a0/v)*(M/M0)^0.67*r_all*(1-SR("Plagioclase"))
+260 moles = rate*TIME
+270 SAVE moles
+-end
+Apatite
+-start
+10 REM Rate law from Palandri and Kharaka (2004)
+20 REM Affinity ON
+30 moles = 0
+40 IF(M <= 0 OR SI("Apatite") > 0) THEN GOTO 270 
+50 rssa = PARM(1)
+60 r_conc = PARM(2)
+70 wporosity = PARM(3)
+80 afrac = PARM(4)
+90 a0 = rssa*r_conc*afrac/wporosity
+100 v = PARM(5)
+110 dif_temp = 1/TK-1/298.15
+120 k_acid = 10^-4.29
+130 eapp_acid = 250
+140 n_acid = 0.171
+150 k_neut = 10^-6
+160 eapp_neut = 250
+170 k_base = 0
+180 eapp_base = 0
+190 n_base = 0
+200 hplus = MOL("H+")
+210 r_acid = k_acid*EXP((-eapp_acid/8.314e-3)*dif_temp)*(hplus^n_acid)
+220 r_neut = k_neut*EXP((-eapp_neut/8.314e-3)*dif_temp)
+230 r_base = k_base*EXP((-eapp_base/8.314e-3)*dif_temp)*(hplus^n_base)
+240 r_all = r_acid+r_neut+r_base
+250 rate = (a0/v)*(M/M0)^0.67*r_all*(1-SR("Apatite"))
+260 moles = rate*TIME
+270 SAVE moles
+-end
+Diopside_Mn
+-start
+10 REM Rate law from Palandri and Kharaka (2004)
+20 REM Affinity ON
+30 moles = 0
+40 IF(M <= 0 OR SI("Diopside_Mn") > 0) THEN GOTO 270 
+50 rssa = PARM(1)
+60 r_conc = PARM(2)
+70 wporosity = PARM(3)
+80 afrac = PARM(4)
+90 a0 = rssa*r_conc*afrac/wporosity
+100 v = PARM(5)
+110 dif_temp = 1/TK-1/298.15
+120 k_acid = 10^-6.36
+130 eapp_acid = 96.1
+140 n_acid = 0.71
+150 k_neut = 10^-11.11
+160 eapp_neut = 40.6
+170 k_base = 0
+180 eapp_base = 0
+190 n_base = 0
+200 hplus = MOL("H+")
+210 r_acid = k_acid*EXP((-eapp_acid/8.314e-3)*dif_temp)*(hplus^n_acid)
+220 r_neut = k_neut*EXP((-eapp_neut/8.314e-3)*dif_temp)
+230 r_base = k_base*EXP((-eapp_base/8.314e-3)*dif_temp)*(hplus^n_base)
+240 r_all = r_acid+r_neut+r_base
+250 rate = (a0/v)*(M/M0)^0.67*r_all*(1-SR("Diopside_Mn"))
+260 moles = rate*TIME
+270 SAVE moles
+-end
+Diopside
+-start
+10 REM Rate law from Palandri and Kharaka (2004)
+20 REM Affinity ON
+30 moles = 0
+40 IF(M <= 0 OR SI("Diopside") > 0) THEN GOTO 270 
+50 rssa = PARM(1)
+60 r_conc = PARM(2)
+70 wporosity = PARM(3)
+80 afrac = PARM(4)
+90 a0 = rssa*r_conc*afrac/wporosity
+100 v = PARM(5)
+110 dif_temp = 1/TK-1/298.15
+120 k_acid = 10^-6.36
+130 eapp_acid = 96.1
+140 n_acid = 0.71
+150 k_neut = 10^-11.11
+160 eapp_neut = 40.6
+170 k_base = 0
+180 eapp_base = 0
+190 n_base = 0
+200 hplus = MOL("H+")
+210 r_acid = k_acid*EXP((-eapp_acid/8.314e-3)*dif_temp)*(hplus^n_acid)
+220 r_neut = k_neut*EXP((-eapp_neut/8.314e-3)*dif_temp)
+230 r_base = k_base*EXP((-eapp_base/8.314e-3)*dif_temp)*(hplus^n_base)
+240 r_all = r_acid+r_neut+r_base
+250 rate = (a0/v)*(M/M0)^0.67*r_all*(1-SR("Diopside"))*10
+260 moles = rate*TIME
+270 SAVE moles
+-end
+Olivine # Forsterite
+-start
+10 REM Rate law from Palandri and Kharaka (2004)
+20 REM Affinity ON
+30 moles = 0
+40 IF(M <= 0 OR SI("Olivine") > 0) THEN GOTO 270 
+50 rssa = PARM(1)
+60 r_conc = PARM(2)
+70 wporosity = PARM(3)
+80 afrac = PARM(4)
+90 a0 = rssa*r_conc*afrac/wporosity
+100 v = PARM(5)
+110 dif_temp = 1/TK-1/298.15
+120 k_acid = 10^-6.85
+130 eapp_acid = 67.2
+140 n_acid = 0.47
+150 k_neut = 10^-10.64
+160 eapp_neut = 79
+170 k_base = 0
+180 eapp_base = 0
+190 n_base = 0
+200 hplus = MOL("H+")
+210 r_acid = k_acid*EXP((-eapp_acid/8.314e-3)*dif_temp)*(hplus^n_acid)
+220 r_neut = k_neut*EXP((-eapp_neut/8.314e-3)*dif_temp)
+230 r_base = k_base*EXP((-eapp_base/8.314e-3)*dif_temp)*(hplus^n_base)
+240 r_all = r_acid+r_neut+r_base
+250 rate = (a0/v)*(M/M0)^0.67*r_all*(1-SR("Olivine"))
+260 moles = rate*TIME
+270 SAVE moles
+-end
+Alkali-Feldspar # K-Feldspar
+-start
+10 REM Rate law from Palandri and Kharaka (2004)
+20 REM Affinity ON
+30 moles = 0
+40 IF(M <= 0 OR SI("Alkali-Feldspar") > 0) THEN GOTO 270 
+50 rssa = PARM(1)
+60 r_conc = PARM(2)
+70 wporosity = PARM(3)
+80 afrac = PARM(4)
+90 a0 = rssa*r_conc*afrac/wporosity
+100 v = PARM(5)
+110 dif_temp = 1/TK-1/298.15
+120 k_acid = 10^-10.06
+130 eapp_acid = 51.7
+140 n_acid = 0.5
+150 k_neut = 10^-12.41
+160 eapp_neut = 38
+170 k_base = 10^-21.2
+180 eapp_base = 94.1
+190 n_base = -0.823
+200 hplus = MOL("H+")
+210 r_acid = k_acid*EXP((-eapp_acid/8.314e-3)*dif_temp)*(hplus^n_acid)
+220 r_neut = k_neut*EXP((-eapp_neut/8.314e-3)*dif_temp)
+230 r_base = k_base*EXP((-eapp_base/8.314e-3)*dif_temp)*(hplus^n_base)
+240 r_all = r_acid+r_neut+r_base
+250 rate = (a0/v)*(M/M0)^0.67*r_all*(1-SR("Alkali-Feldspar"))
+260 moles = rate*TIME
+270 SAVE moles
+-end
+Montmorillonite
+-start
+10 REM Rate law from Palandri and Kharaka (2004)
+20 REM Affinity ON
+30 moles = 0
+40 IF(M <= 0 OR SI("Montmorillonite") > 0) THEN GOTO 270 
+50 rssa = PARM(1)
+60 r_conc = PARM(2)
+70 wporosity = PARM(3)
+80 afrac = PARM(4)
+90 a0 = rssa*r_conc*afrac/wporosity
+100 v = PARM(5)
+110 dif_temp = 1/TK-1/298.15
+120 k_acid = 10^-12.71
+130 eapp_acid = 48
+140 n_acid = 0.22
+150 k_neut = 10^-14.41
+160 eapp_neut = 48
+170 k_base = 10^-14.41
+180 eapp_base = 48
+190 n_base = -0.13
+200 hplus = MOL("H+")
+210 r_acid = k_acid*EXP((-eapp_acid/8.314e-3)*dif_temp)*(hplus^n_acid)
+220 r_neut = k_neut*EXP((-eapp_neut/8.314e-3)*dif_temp)
+230 r_base = k_base*EXP((-eapp_base/8.314e-3)*dif_temp)*(hplus^n_base)
+240 r_all = r_acid+r_neut+r_base
+250 rate = (a0/v)*(M/M0)^0.67*r_all*(1-SR("Montmorillonite"))
+260 moles = rate*TIME
+270 SAVE moles
+-end
+Ilmenite
+-start
+10 REM Rate law from Palandri and Kharaka (2004) 
+20 REM Affinity ON
+30 moles = 0
+40 IF(M <= 0 OR SI("Ilmenite") > 0) THEN GOTO 270 
+50 rssa = PARM(1)
+60 r_conc = PARM(2)
+70 wporosity = PARM(3)
+80 afrac = PARM(4)
+90 a0 = rssa*r_conc*afrac/wporosity
+100 v = PARM(5)
+110 dif_temp = 1/TK-1/298.15
+120 k_acid = 10^-8.35
+130 eapp_acid = 37.9
+140 n_acid = 0.421
+150 k_neut = 10^-11.16
+160 eapp_neut = 37.9
+170 k_base = 0
+180 eapp_base = 0
+190 n_base = 0
+200 hplus = MOL("H+")
+210 r_acid = k_acid*EXP((-eapp_acid/8.314e-3)*dif_temp)*(hplus^n_acid)
+220 r_neut = k_neut*EXP((-eapp_neut/8.314e-3)*dif_temp)
+230 r_base = k_base*EXP((-eapp_base/8.314e-3)*dif_temp)*(hplus^n_base)
+240 r_all = r_acid+r_neut+r_base
+250 rate = (a0/v)*(M/M0)^0.67*r_all*(1-SR("Ilmenite"))
+260 moles = rate*TIME
+270 SAVE moles
+-end
+#Glass
+#-start
+#10 REM Rate law from Flaathen et al. (2010) 
+#20 REM Affinity ON
+#30 moles = 0
+#40 IF(M <= 0 OR SI("Glass") >= 0) THEN GOTO 200
+#50 rssa = PARM(1)
+#60 r_conc = PARM(2)
+#70 wporosity = PARM(3)
+#80 afrac = PARM(4)
+#90 a0 = rssa*r_conc*afrac/wporosity
+#100 v = PARM(5)
+#110 temp = TK
+#120 k_glass = 5e-4
+#130 eapp_glass = 25.5
+#140 n_acid = 3
+#150 hplus = ACT("H+")
+#160 alplus = ACT("Al+3")
+#170 r_acid_al = k_glass*EXP(-eapp_glass/8.314e-3/temp)*((hplus^n_acid)/(alplus))^0.503
+#180 rate = (a0/v)*(M/M0)^0.67*r_acid_al*(1-SR("Glass"))
+#190 moles = rate*TIME
+#200 SAVE moles
+
+Glass
+# from Pollyea and Rimstidt (2017)
+-start
+3 moles = 0
+5 rssa = PARM(1)
+6 r_conc = PARM(2)
+7 wporosity = PARM(3)
+8 afrac = PARM(4)
+9 a0 = rssa*r_conc*afrac/wporosity
+10 v = PARM(5)
+11 rem acid solution parameters
+12 a1=485		
+13 E1=39700
+14 n1=1.013
+20 rem neutral solution parameters
+21 a2=0.0	
+22 E2=0.0
+30 rem base solution parameters
+31 a3=5.34E-5		
+32 E3=38400
+33 n2=-0.258
+36 rem rate=0 if no minerals and undersaturated
+40 SR_mineral=SR("Glass")
+41 if (M<0) then goto 200
+42 if (M=0 and SR_mineral<1) then goto 200
+50 if (SA<=0) then SA=1
+60 R=8.31451
+75 Rate1=a1*EXP(-E1/R/TK)*ACT("H+")^n1  #acid rate expression
+80 Rate2=a2*EXP(-E2/R/TK)               #neutral rate expression
+85 Rate3=a3*EXP(-E3/R/TK)*ACT("H+")^n2    #base rate expression
+90 Rate=(Rate1+Rate2+Rate3)*(1-Sr_mineral)*(a0/v)*(M/M0)^0.67
+100 moles= rate*Time
+200 save moles
+-end
+
+INCREMENTAL_REACTIONS true
+
+#=================SOIL CONCEPTUAL MODEL=============================================
+# Volume relationships
+#----------------------
+#Soil minerals			= 0.53	L_soil_mnrl/L_soil
+#Soil carbon				= 0.02	L_carbon/L_soil
+#Effective porosity		= 0.20	L_porewater/L_soil
+#“Air"= air and blind pores	= 0.25	L_air/L_soil
+
+# Application “rate"of basalt	
+#-----------------------------
+#Basalt amended	100	tonne_bslt/ha_soil
+#Height of topsoil layer	0.25	m_soil
+#Units conversion	1.00E+04	m2_soil/ha_soil
+#Volume of soil	2500	m3_soil/ha_soil
+#Units conversion	2.50E+06	L_soil/ha_soil
+#Litres pw per ha 	5.00E+05	L_pw/ha_soil
+#Units conversion	1.00E+05	kg_bslt/ha_soil
+#Basalt per volume of soil	4.00E-02	kg_bslt/L_soil
+#Units conversion	40.0	g_bslt/L_soil
+#Concentration of basalt	200.0	g_bslt/L_porewater
+
+#Example calculation for kinetic mineral abundance				
+#MASS RELATIONSHIPS				
+#E.g.			Plagioclase # Labradorite	
+#Molecular formula			Ca0.5Na0.5Al1.5Si2.5O8	
+#Weight proportion in basalt			0.351	g_mnrl/g_bslt
+#Molar mass mineral			270.214	g_mnrl/mole_mnrl
+#Molar concentration			1.30E-03	mole_mnrl/g_bslt
+#Concentration of basalt			200.0	g_bslt/L_porewater
+#Mineral aqueous concentration			0.25987	mole_mnrl/L_porewater
+#				
+#AREA RELATIONSHIPS				
+#Mineral Density			2.73	g_mnrl/mL_mnrl
+#Volume fraction			0.129	mL_mnrl/g_bslt
+#Volume proportion			0.361	mL_mnrl/mL_mnrls
+#Relative SA’s = vol-proportion^(2/3)			0.507	
+#SA proportion			0.285	cm2_mnrl/cm2_bslt#
+#===========================================================================================
+
+KINETICS 1-5 
+# Rock surface area from Mark = 7.35 m2_bslt/g_bslt
+# Na0.104881 Mg3.444908 Al0.330896 Si16.954071 S0.504616 K13.543257 Ca7.488969 Mn0.012371 Fe0.258850 Zn0.021552 Ba0.007583 : replace with the plant uptake stoichiometry in MOLES
+MikeSorghum
+#    -formula  Ag  -0.001 Na0.104881 Mg3.444908 Al0.330896 Si16.954071 S0.504616 K13.543257 Ca7.488969 Mn0.012371 Fe0.258850 Zn0.021552 Ba0.007583   1
+-formula  Ca0.73Mg0.31K0.91Si3.31  1
+-m        0
+-m0       0
+-parms    0.2 0.2 # 0.22625 - v is the volume of solution in the cell - not used
+-tol      1e-08
+# Parameters for the mineral dissolution kinetics below are:
+# parameter 1: reactive surface area in square meters per gram basalt
+# parameter 2: Grams of basalt per liter of soil
+# parameter 3: Water filled porosity (fraction)
+# parameter 4: the mineral area fraction in the rock m2mineral/m2rock
+# parameter 5: pore water volume (set to 1 L)
+# Example:    -parms    7.35  40.0  0.25  0.016 1.0  for Quartz
+Quartz
+-formula  SiO2  1
+-m      0.01465 # moles per litre pores
+-m0     0.01465
+-parms    7.35  40.0  0.20  0.016 1.0  # Rock specific surface area (m2_rock/g_rock); rock conc in soil (g_rock/L_soil) 
+# water-filled porosity; mineral area fraction in rock (m2_minrl/m2_rock); volume pore water (L)
+-tol      1e-008
+Plagioclase # Labradorite
+-formula  Ca0.5Na0.5Al1.5Si2.5O8  1
+-m      0.25987 # moles per litre pores
+-m0     0.25987
+-parms    7.35  40.0  0.20  0.285 1.0  # Rock specific surface area (m2_rock/g_rock); rock conc in soil (g_rock/L_soil) 
+# water-filled porosity; mineral area fraction in rock (m2_minrl/m2_rock); volume pore water (L)
+-tol      1e-008
+Apatite
+-formula  Ca5(PO4)3OH  1
+-m      0.01107 # moles per litre pores
+-m0     0.01107
+-parms    7.35  40.0  0.20  0.047 1.0  # Rock specific surface area (m2_rock/g_rock); rock conc in soil (g_rock/L_soil) 
+# water-filled porosity; mineral area fraction in rock (m2_minrl/m2_rock); volume pore water (L)
+-tol      1e-008
+Diopside_Mn
+-formula  Ca0.87Mg0.94Mn0.19Si1.7O6  1
+-m      0.05871 # moles per litre pores
+-m0     0.05871
+-parms    7.35  40.0  0.20  0.078 1.0  # Rock specific surface area (m2_rock/g_rock); rock conc in soil (g_rock/L_soil) 
+# water-filled porosity; mineral area fraction in rock (m2_minrl/m2_rock); volume pore water (L)
+-tol      1e-008
+Diopside 
+-formula  CaMg0.7Al0.6Si1.7O6  1
+-m      0.04092 # moles per litre pores
+-m0     0.04092
+-parms    7.35  40.0  0.20  0.062 1.0  # Rock specific surface area (m2_rock/g_rock); rock conc in soil (g_rock/L_soil) 
+# water-filled porosity; mineral area fraction in rock (m2_minrl/m2_rock); volume pore water (L)
+-tol      1e-008
+Olivine # Forsterite
+-formula  Mg1.04Fe0.96SiO4  1
+-m      0.0117 # moles per litre pores
+-m0     0.0117
+-parms    7.35  40.0  0.20  0.024 1.0  # Rock specific surface area (m2_rock/g_rock); rock conc in soil (g_rock/L_soil) 
+# water-filled porosity; mineral area fraction in rock (m2_minrl/m2_rock); volume pore water (L)
+-tol      1e-008
+Alkali-feldspar # K-feldspar
+-formula  K0.41Na0.56Ca0.03Al1.03Si2.97O8  1
+-m      0.17081 # moles per litre pores
+-m0     0.17081
+-parms    7.35  40.0  0.20  0.227 1.0  # Rock specific surface area (m2_rock/g_rock); rock conc in soil (g_rock/L_soil) 
+# water-filled porosity; mineral area fraction in rock (m2_minrl/m2_rock); volume pore water (L)
+-tol      1e-008
+Montmorillonite
+-formula  Ca0.6Al2Si4O10(OH)2  1
+-m      0.00444 # moles per litre pores
+-m0     0.00444
+-parms    7.35  40.0  0.20  0.021 1.0  # Rock specific surface area (m2_rock/g_rock); rock conc in soil (g_rock/L_soil) 
+# water-filled porosity; mineral area fraction in rock (m2_minrl/m2_rock); volume pore water (L)
+-tol      1e-008
+Ilmenite
+-formula  FeTiO3  1
+-m      0.00738 # moles per litre pores
+-m0     0.00738
+-parms    7.35  40.0  0.20  0.02 1.0  # Rock specific surface area (m2_rock/g_rock); rock conc in soil (g_rock/L_soil) 
+# water-filled porosity; mineral area fraction in rock (m2_minrl/m2_rock); volume pore water (L)
+-tol      1e-008
+Glass
+-formula  Na0.13Ca0.08Mg0.05K0.10Fe0.12Al0.26Si1.00O2.86  1
+-m      0.50344 # moles per litre pores
+-m0     0.50344
+-parms    7.35  40.0  0.20  0.217 1.0  # Rock specific surface area (m2_rock/g_rock); rock conc in soil (g_rock/L_soil) 
+# water-filled porosity; mineral area fraction in rock (m2_minrl/m2_rock); volume pore water (L)
+-tol      1e-008
+#CalciumCarbonate # Left in the model to inform the EQUILIBRIUM PHASES data block
+#    -formula  CaCO3  1 # 
+#    -m      0.00839 # moles per litre pores
+#    -m0     0.00839
+#    -parms 1.67e5   0.6  # cm^2/mol calcite, exp factor
+#    -tol      1e-008
+#-runge_kutta 6
+#-bad_step_max 500
+-cvode true
+-cvode_order 5
+-cvode_steps 200
+
+# Average leachate 4.58 L/colm. Column c/s area 0.0181 m2/colm. Period 121 days/colm. Porosity 0.20. 
+# Bulk flowthrough = 763.8 mm/year. Pore velocity = 1.21e-7 m/sec. Shift period = 413154.2 s/5cm. 
+TRANSPORT
+-cells                 11
+-shifts  450 # shifts for 5 years
+#    -shifts  450 # shifts for 120 days
+-time_step  350722.010 # seconds/cell
+-lengths               11*0.05
+-dispersivities        11*0
+-print_cells           5 # Last basalt-containing cell
+-punch_cells           1-11
+
