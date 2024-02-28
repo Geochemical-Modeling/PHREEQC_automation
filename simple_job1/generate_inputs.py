@@ -75,11 +75,12 @@ def read_sections(textfile: str) -> list:
         print(f"File not found: {textfile}")
         return None
 
-def modify_rate_line_for_mineral(content, mineral, multiplier):
+def modify_rate_line_for_mineral(content, mineral, multiplier, area_multiplier):
     """
-    Modify the rate line within a mineral block in the content by applying a multiplier
-    directly after 'k_sorghum', before any comments or additional content.
+    Modify the rate line within a mineral block in the content by applying a rate multiplier
+    and an area coefficient modification.
     """
+    # Pattern for MikeSorghum to handle its unique equation differently
     if mineral == "MikeSorghum":
         # Adjusted pattern to include 'k_sorghum' and optionally capture comments or additional content
         rate_line_pattern = re.compile(rf'(plant_rate\s*=\s*\(plantarea\)\*k_sorghum)(\s*#.*)?')
@@ -87,7 +88,7 @@ def modify_rate_line_for_mineral(content, mineral, multiplier):
             part_before_comment = match.group(1)  # Part before the comment
             comment = match.group(2) if match.group(2) else ''  # The comment, if present
             # Insert the multiplier directly after 'k_sorghum', before the comment
-            modified_rate_line = f"{part_before_comment}*{multiplier}{comment}"
+            modified_rate_line = f"{part_before_comment.replace('plantarea', f'plantarea*{area_multiplier}')}*{multiplier}{comment}"
             return modified_rate_line
         modified_content = rate_line_pattern.sub(replace_rate_line_sorghum, content)
     else:
@@ -95,10 +96,9 @@ def modify_rate_line_for_mineral(content, mineral, multiplier):
         rate_line_pattern = re.compile(rf'(rate = .*?\(1-SR\("{mineral}"\)\))')
         def replace_rate_line_other(match):
             original_rate_line = match.group(1)
-            modified_rate_line = f"{original_rate_line}*{multiplier}"  # Append the multiplier
+            modified_rate_line = f"{original_rate_line.replace('a0', f'a0*{area_multiplier}')}*{multiplier}"  # Append the multiplier
             return modified_rate_line
         modified_content = rate_line_pattern.sub(replace_rate_line_other, content)
-    
     return modified_content
 
 
@@ -111,10 +111,11 @@ def workflow(basefile):
     para_shifts = list(range(100, 550, 50))
     minerals = ["MikeSorghum", "Quartz", "Plagioclase", "Apatite", "Diopside_Mn", "Diopside", "Olivine", "Alkali-feldspar", "Montmorillonite", "Ilmenite", "Glass"]
     multipliers = [0.01, 0.1, 1, 10, 100]
+    area_coef = [0.2, 0.5, 1, 2, 5]
     base_files = [basefile, replace_solution(basefile, "SOLUTION 0", "SOLUTION_0.txt")]  # Assuming replace_solution returns a filename
 
     # Calculate the total number of simulations
-    total_simulations = len(para_temp) * len(para_shifts) * len(minerals) * len(multipliers) * len(base_files)
+    total_simulations = len(para_temp) * len(para_shifts) * len(minerals) * len(multipliers) * len(base_files) * len(area_coef)
     print(f"Total simulations to be generated: {total_simulations}")
 
 
@@ -129,10 +130,10 @@ def workflow(basefile):
             base_content = file.read()
 
         # Generate all combinations of parameters
-        para_combines = itertools.product(para_temp, para_shifts, minerals, multipliers)
-        for temp, shifts, mineral, multiplier in para_combines:
+        para_combines = itertools.product(para_temp, para_shifts, minerals, multipliers, area_coef)
+        for temp, shifts, mineral, multiplier, area_multiplier in para_combines:
             time_step = 157824904.4 / shifts
-            modified_content = modify_rate_line_for_mineral(base_content, mineral, multiplier)
+            modified_content = modify_rate_line_for_mineral(base_content, mineral, multiplier, area_multiplier)
             para_values = [str(temp), str(shifts), "{:.3f}".format(time_step)]
 
             # Replace parameters in the modified content
@@ -144,7 +145,7 @@ def workflow(basefile):
             filepath = os.path.join(jobs_folder, jobname)
             with open(filepath, "w", encoding="utf-8") as file:
                 file.write(modified_content)
-            summary.append([jobname, basefile_path] + para_values + [mineral, str(multiplier)])
+            summary.append([jobname, basefile_path] + para_values + [mineral, str(multiplier), str(area_multiplier)])
             count += 1
 
     # Write summary to CSV
